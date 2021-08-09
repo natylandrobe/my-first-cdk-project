@@ -1,6 +1,7 @@
 from aws_cdk import (
     aws_s3 as _s3,
     aws_kms as _kms,
+    
     core as cdk
 )
 # For consistency with other languages, `cdk` is the preferred import name for
@@ -24,6 +25,8 @@ class MyArtifactBucketStack(cdk.Stack):
                 versioned = True,
                 encryption= _s3.BucketEncryption.S3_MANAGED
             )
+            
+            cdk.Tags.of(artifactBucket).add("Owner", "Naty")
 
         else:
             artifactBucket = _s3.Bucket(
