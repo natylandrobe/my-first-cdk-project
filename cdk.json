@@ -13,6 +13,14 @@
     "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
-    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true
-  }
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "dev": {
+      "region": "us-east-1"
+    },
+    "prod":{
+      "region": "eu-west-1",
+      "encryption": true
+    }
+  },
+  "versionReporting": false
 }

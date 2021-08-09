@@ -10,16 +10,24 @@ from aws_cdk import (
 from aws_cdk import core
 
 
-class MyFirstCdkProjectStack(cdk.Stack):
+class MyArtifactBucketStack(cdk.Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: cdk.Construct, construct_id: str, is_prod = False, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-        _s3.Bucket(
-            self,
-            "myBucketId",
-            versioned = False,
-            encryption = _s3.BucketEncryption.S3_MANAGED,
-            block_public_access = _s3.BlockPublicAccess.BLOCK_ALL
-        )
+        
+        if is_prod:
+            artifactBucket = _s3.Bucket(
+                self,
+                "MyProdArtifactBucketID",
+                versioned = True,
+                encryption= _s3.BucketEncryption.S3_MANAGED
+            )
+
+        else:
+            artifactBucket = _s3.Bucket(
+                self,
+                "MyDevArtifactBucketID",
+                removal_policy= cdk.RemovalPolicy.DESTROY
+            )
